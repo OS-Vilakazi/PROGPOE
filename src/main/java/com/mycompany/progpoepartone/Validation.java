@@ -49,6 +49,9 @@ class Validation {
         //return true if pattern matches password
         return matcher.matches();
         }
+        public boolean loginUser(String storedUser, String storedPass, String loginUser, String loginPass) {
+        return loginUser.equals(storedUser) && loginPass.equals(storedPass);
+        }
     }
        
        
