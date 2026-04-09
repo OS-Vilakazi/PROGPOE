@@ -8,18 +8,7 @@ import java.util.regex.Pattern;
 class Validation {
     
        public boolean checkUserName (String username){
-        
-        //declare a variable to store the pattern 
-        String regex = "^(?=.*_).{1,5}$";
-        
-        //pattern object to compile the regex
-        Pattern pattern = Pattern.compile(regex);
-        
-        //matcher object to match the Username to the regex
-        Matcher matcher = pattern.matcher(username);
-        
-        //return true if pattern matches Username
-        return matcher.matches();
+        return username.contains("_") && username.length() <=5;
        }
         
         public boolean checkPasswordComplexity(String password){
