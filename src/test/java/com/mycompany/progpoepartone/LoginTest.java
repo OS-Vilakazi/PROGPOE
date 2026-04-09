@@ -31,7 +31,7 @@ public class LoginTest {
         assertEquals(expResult, result);
        
     }
-    @org.junit.jupiter.api.Test
+        @org.junit.jupiter.api.Test
         public void testCheckUserNameReturnFalse() {
         System.out.println("checkUserName");
         String username = "kaiser";
@@ -84,7 +84,7 @@ public class LoginTest {
      * Test of loginUser method, of class Login.
      */
     @org.junit.jupiter.api.Test
-    public void testLoginUser() {
+    public void testLoginUserReturnTrue() {
         System.out.println("loginUser");
         String storedUser = "kais_";
         String storedPass = "Password1$";
@@ -96,5 +96,56 @@ public class LoginTest {
         assertEquals(expResult, result);
        
     }
-    
+    @org.junit.jupiter.api.Test
+    public void testLoginUserReturnFalseStoredUser() {
+        System.out.println("loginUser");
+        String storedUser = "kaiser";
+        String storedPass = "Password1$";
+        String loginUser = "kais_";
+        String loginPass = "Password1$";
+        Login instance = new Login();
+        boolean expResult = false;
+        boolean result = instance.loginUser(storedUser, storedPass, loginUser, loginPass);
+        assertEquals(expResult, result);
+       
+    }
+    @org.junit.jupiter.api.Test
+    public void testLoginUserReturnFalseStoredPass() {
+        System.out.println("loginUser");
+        String storedUser = "kais_";
+        String storedPass = "Password12";
+        String loginUser = "kais_";
+        String loginPass = "Password1$";
+        Login instance = new Login();
+        boolean expResult = false;
+        boolean result = instance.loginUser(storedUser, storedPass, loginUser, loginPass);
+        assertEquals(expResult, result);
+       
+    }
+    @org.junit.jupiter.api.Test
+    public void testLoginUserReturnFalseLoginUser() {
+        System.out.println("loginUser");
+        String storedUser = "kais_";
+        String storedPass = "Password1$";
+        String loginUser = "kaiser_";
+        String loginPass = "Password1$";
+        Login instance = new Login();
+        boolean expResult = false;
+        boolean result = instance.loginUser(storedUser, storedPass, loginUser, loginPass);
+        assertEquals(expResult, result);
+       
+    }
+    @org.junit.jupiter.api.Test
+    public void testLoginUserReturnFalseLoginPass() {
+        System.out.println("loginUser");
+        String storedUser = "kais_";
+        String storedPass = "Password1$";
+        String loginUser = "kais_";
+        String loginPass = "Password13";
+        Login instance = new Login();
+        boolean expResult = false;
+        boolean result = instance.loginUser(storedUser, storedPass, loginUser, loginPass);
+        assertEquals(expResult, result);
+       
+    }
 }
