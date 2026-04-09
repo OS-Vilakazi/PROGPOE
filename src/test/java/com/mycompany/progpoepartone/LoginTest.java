@@ -22,7 +22,7 @@ public class LoginTest {
      * Test of checkUserName method, of class Login.
      */
     @org.junit.jupiter.api.Test
-    public void testCheckUserName() {
+    public void testCheckUserNameReturnTrue() {
         System.out.println("checkUserName");
         String username = "kais_";
         Login instance = new Login();
@@ -32,7 +32,7 @@ public class LoginTest {
        
     }
     @org.junit.jupiter.api.Test
-        public void testCheckUserName() {
+        public void testCheckUserNameReturnFalse() {
         System.out.println("checkUserName");
         String username = "kaiser";
         Login instance = new Login();
@@ -60,11 +60,21 @@ public class LoginTest {
      * Test of checkCellPhone method, of class Login.
      */
     @org.junit.jupiter.api.Test
-    public void testCheckCellPhone() {
+    public void testCheckCellPhoneReturnTrue() {
         System.out.println("checkCellPhone");
         String cellPhone = "+27123456789";
         Login instance = new Login();
         Boolean expResult = true;
+        Boolean result = instance.checkCellPhone(cellPhone);
+        assertEquals(expResult, result);
+       
+    }
+    @org.junit.jupiter.api.Test
+    public void testCheckCellPhoneReturnFalse() {
+        System.out.println("checkCellPhone");
+        String cellPhone = "0831234567";
+        Login instance = new Login();
+        Boolean expResult = false;
         Boolean result = instance.checkCellPhone(cellPhone);
         assertEquals(expResult, result);
        
