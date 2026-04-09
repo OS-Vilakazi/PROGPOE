@@ -7,7 +7,7 @@ public class ProgPoePartOne {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Validation valid = new Validation();
+        Login valid = new Login();
         
         
         //Declaring Variables

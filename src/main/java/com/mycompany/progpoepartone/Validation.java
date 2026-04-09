@@ -5,9 +5,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-class Validation {
+class Login {
     
        public boolean checkUserName (String username){
+        
         return username.contains("_") && username.length() <=5;
        }
         
@@ -27,7 +28,7 @@ class Validation {
             }
         public Boolean checkCellPhone(String cellPhone) {
          //Starts with '+' and total length <= 10
-        String regex = "^\\+(?=.{1,9}$)[0-9]+$";
+        String regex = "^\\+27(?=.{1,11}$)[0-9]+$";
     
         //pattern object to compile the regex
         Pattern pattern = Pattern.compile(regex);
