@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 class Login {
     
        public boolean checkUserName (String username){
-        
+        //requirements for username
         return username.contains("_") && username.length() <=5;
        }
         
@@ -27,7 +27,7 @@ class Login {
             return matcher.matches();
             }
         public Boolean checkCellPhone(String cellPhone) {
-         //Starts with '+' and total length <= 10
+         //Starts with '+' and total length <= 11
         String regex = "^\\+27(?=.{1,11}$)[0-9]+$";
     
         //pattern object to compile the regex

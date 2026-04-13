@@ -16,7 +16,7 @@ public class ProgPoePartOne {
         //Header
         System.out.println("༺ Sign Up ༻");
         
-        
+        //inputing the users name and last name
         System.out.println("Please enter your First Name");
         firstName = input.nextLine();
         
