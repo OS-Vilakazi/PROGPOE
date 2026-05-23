@@ -15,13 +15,19 @@ import java.util.Scanner;
 public class Message {
     
     //private variables
-    private String messageID;
-    private int messageNumber;
-    private String recipient;
-    private String messageText;
-    private String messageHash;
+    private String messageID;       // random 10-digit number
+    private int messageNumber;      // which number message this is (1, 2, 3...)
+    private String recipient;       // the phone number we're sending to
+    private String messageText;     // the actual message
 
-    // Tracks all sent messages across the session
-    private static ArrayList<String> sentMessages = new ArrayList<>();
-    private static int totalMessagesSent = 0;
-}
+    
+    private static ArrayList<String> sentMessages = new ArrayList<>(); // stores all sent messages
+    private static int totalMessagesSent = 0; // counts how many were sent
+    
+    //A Constructor to run new messages 
+    public Message(int messageNumber, String recipient, String messageText) {
+        this.messageNumber = messageNumber;
+        this.recipient = recipient;
+        this.messageText = messageText;
+        this.messageID = generateMessageID();   // auto-generate the ID
+    }
