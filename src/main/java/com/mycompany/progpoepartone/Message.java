@@ -5,8 +5,6 @@
 package com.mycompany.progpoepartone;
 //to have resizable array 
 import java.util.ArrayList;
-//Random class is used to generate pseudo-random numbers in java
-import java.util.Random;
 import java.util.Scanner;
 /**
  *
@@ -30,4 +28,13 @@ public class Message {
         this.recipient = recipient;
         this.messageText = messageText;
         this.messageID = generateMessageID();   // auto-generate the ID
+    }
+// Builds a 10-digit ID by picking random digits one at a time
+    private String generateMessageID() {
+        String id = ""; // start with empty text
+        for (int i = 0; i < 10; i++) {
+            int randomDigit = (int) (Math.random() * 10); // random number 0-9
+            id = id + randomDigit; // glue digit onto the end
+        }
+        return id;}
     }
