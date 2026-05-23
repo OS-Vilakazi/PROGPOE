@@ -14,4 +14,14 @@ import java.util.Scanner;
  */
 public class Message {
     
+    //private variables
+    private String messageID;
+    private int messageNumber;
+    private String recipient;
+    private String messageText;
+    private String messageHash;
+
+    // Tracks all sent messages across the session
+    private static ArrayList<String> sentMessages = new ArrayList<>();
+    private static int totalMessagesSent = 0;
 }
