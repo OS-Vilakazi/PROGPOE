@@ -57,4 +57,23 @@ public class Message {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
     }
-}
+
+// Builds the hash: first 2 digits of ID + ":" + message number + ":" + first word + last word
+    // Example result: "00:1:HITONIGHT"
+    public String createMessageHash() {
+        // Split the message into individual words using spaces
+        String[] words = messageText.trim().split(" ");
+
+        // Grab the first and last words
+        String firstWord = words[0];
+        String lastWord = words[words.length - 1];
+
+        // Grab only the first 2 characters of the message ID
+        String firstTwoDigits = messageID.substring(0, 2);
+
+        // Build the hash by joining the parts with colons
+        String hash = firstTwoDigits + ":" + messageNumber + ":" + firstWord + lastWord;
+
+        // Return it in all caps
+        return hash.toUpperCase();
+    }
