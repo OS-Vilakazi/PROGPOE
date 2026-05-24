@@ -77,3 +77,46 @@ public class Message {
         // Return it in all caps
         return hash.toUpperCase();
     }
+    // Asks the user what to do with the message
+    public String sentMessage() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("What would you like to do?");
+        System.out.println("1) Send Message");
+        System.out.println("2) Disregard Message");
+        System.out.println("3) Store Message to send later");
+
+        int choice = Integer.parseInt(input.nextLine()); // read the user's choice
+
+        if (choice == 1) {
+            totalMessagesSent++;              // add 1 to the counter
+            sentMessages.add(printMessages()); // save message details to the list
+            return "Message successfully sent.";
+        } else if (choice == 2) {
+            return "Press 0 to delete the message.";
+        } else if (choice == 3) {
+            return "Message successfully stored.";
+        } else {
+            return "Invalid option.";
+        }
+    }
+
+    // Returns all message details as one block of text
+    public String printMessages() {
+        String details = "Message ID: " + messageID + "\n";
+        details = details + "Message Hash: " + createMessageHash() + "\n";
+        details = details + "Recipient: " + recipient + "\n";
+        details = details + "Message: " + messageText;
+        return details;
+    }
+
+    // Returns the total number of messages sent so far
+    public int returnTotalMessages() {
+        return totalMessagesSent;
+    }
+
+    // Getters - let other classes read private fields
+    public String getMessageID()   { return messageID; }
+    public String getMessageText() { return messageText; }
+    public String getRecipient()   { return recipient; }
+}
