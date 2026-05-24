@@ -8,25 +8,25 @@ public class ProgPoePartOne {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Login valid = new Login();
-        
+
         
         //Declaring Variables
         String username, password, phoneNum, firstName, lastName;
-        
+
         //Header
         System.out.println("༺ Sign Up ༻");
-        
+
         //inputing the users name and last name
         System.out.println("Please enter your First Name");
         firstName = input.nextLine();
-        
+
         System.out.println("Please enter your Last Name");
         lastName = input.nextLine();
-        
+
         //Registering a valid username
         System.out.println("Please enter a Valid username");
         username = input.nextLine();
-        
+
         //Validate
         
         while (!valid.checkUserName(username)) {
@@ -35,11 +35,11 @@ public class ProgPoePartOne {
             username = input.nextLine();
         }
         System.out.println("Username successfully captured.");
-        
+
         //Password Registration
         System.out.println("Please create a Valid Password it must conain:\n\u2022 at least 8 characters long\n\u2022 Contain a capital letter\n\u2022 Contain a number\n\u2022 Contain a special Character.");
         password = input.nextLine();
-        
+
         //Validate 
         while (!valid.checkPasswordComplexity(password)) {
             System.out.println("Password is not correctly formatted; please ensure that the password contains at least 8 characters, a capital letter, a number, and a special character.");
@@ -47,10 +47,10 @@ public class ProgPoePartOne {
             password = input.nextLine();
         }
         System.out.println("Password successfully captured.");
-        
+
         System.out.println("Please enter a Valid Cell phone number. ");
         phoneNum = input.nextLine();
-        
+
         //Validate
         while (!valid.checkCellPhone(phoneNum)) {
             System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
@@ -58,21 +58,94 @@ public class ProgPoePartOne {
             phoneNum = input.nextLine();
         }
         System.out.println("Cell Phone number successfully added.");
-        
+
         //Login VERIFICATION
         System.out.println("\n LOGIN");
         System.out.print("Enter username: ");
         String loginUser = input.nextLine();
-        
+
         System.out.print("Enter password: ");
         String loginPass = input.nextLine();
-        
+
         //Verifying the login info
         if (valid.loginUser(username, password, loginUser, loginPass)) {
-        System.out.println("Welcome " + firstName + " " + lastName + " it is great to see you again.");
+
+            System.out.println("Welcome to HermesChat");
+
+            // Ask how many messages the user wants to send this session
+            System.out.println("How many messages do you want to send?");
+            int numMessages = Integer.parseInt(input.nextLine());
+
+            int menuChoice = 0; // stores the user's menu selection
+
+            // Keep showing the menu until the user chooses Quit
+            while (menuChoice != 3) {
+
+                System.out.println("\n1) Send Messages");
+                System.out.println("2) Show recently sent messages");
+                System.out.println("3) Quit");
+
+                menuChoice = Integer.parseInt(input.nextLine());
+
+                if (menuChoice == 1) {
+
+                    // Send messages one at a time up to the limit
+                    int messagesSent = 0;
+
+                    while (messagesSent < numMessages) {
+
+                        System.out.println("Enter recipient number (must start with + and be max 10 characters):");
+                        String recipient = input.nextLine();
+
+                        System.out.println("Enter your message (max 250 characters):");
+                        String text = input.nextLine();
+
+                        // Check if the message is too long
+                        if (text.length() > 250) {
+                            int over = text.length() - 250; // how many characters over the limit
+                            System.out.println("Please enter a message of less than 250 characters.");
+                            System.out.println("Message exceeds 250 characters by " + over + "; please reduce the size.");
+                            continue; // skip the rest and ask again
+                        }
+
+                        // Create the message object with the entered details
+                        Message msg = new Message(messagesSent + 1, recipient, text);
+
+                        // Validate the recipient number and show the result
+                        System.out.println(msg.checkRecipientCell());
+
+                        // If the number is invalid, ask again without counting this attempt
+                        if (!recipient.startsWith("+") || recipient.length() > 10) {
+                            continue;
+                        }
+
+                        // Show the full message details
+                        System.out.println(msg.printMessages());
+
+                        // Ask the user what to do: send, discard, or store
+                        String result = msg.sentMessage();
+                        System.out.println(result);
+
+                        messagesSent++; // only count it once everything went through
+                    }
+
+                    // Show the total after all messages are done
+                    Message temp = new Message(0, "+0000000000", "placeholder");
+                    System.out.println("Total messages sent: " + temp.returnTotalMessages());
+
+                } else if (menuChoice == 2) {
+                    System.out.println("Coming Soon.");
+
+                } else if (menuChoice == 3) {
+                    System.out.println("Goodbye.");
+
+                } else {
+                    System.out.println("Invalid option, please choose 1, 2, or 3.");
+                }
+            }
+
         } else {
             System.out.println("Username or password incorrect, please try again.");
         }
-        
     }
 }
