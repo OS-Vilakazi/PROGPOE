@@ -6,6 +6,9 @@ package com.mycompany.progpoepartone;
 //to have resizable array 
 import java.util.ArrayList;
 import java.util.Scanner;
+//to help create a json file to store messages
+import java.io.FileWriter;
+//
 /**
  *
  * @author falconsyre
@@ -77,6 +80,28 @@ public class Message {
         // Return it in all caps
         return hash.toUpperCase();
     }
+    
+    // Saves this message into a file called "messages.json"
+    public void storeMessage() {
+        try {
+            // Build the message as a JSON formatted string manually
+            String messageData = "{\n" +
+                "  \"messageID\": \"" + messageID + "\",\n" +
+                "  \"messageHash\": \"" + createMessageHash() + "\",\n" +
+                "  \"recipient\": \"" + recipient + "\",\n" +
+                "  \"message\": \"" + messageText + "\"\n" +
+                "}";
+
+            // 'true' means APPEND - adds to the file instead of overwriting it
+            FileWriter file = new FileWriter("messages.json", true);
+            file.write(messageData + ",\n");
+            file.close();
+
+        } catch (Exception e) {
+            System.out.println("Error saving message: " + e.getMessage());
+        }
+    }
+    
     // Asks the user what to do with the message
     public String sentMessage() {
         Scanner input = new Scanner(System.in);

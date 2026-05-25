@@ -72,10 +72,6 @@ public class ProgPoePartOne {
 
             System.out.println("Welcome to HermesChat");
 
-            // Ask how many messages the user wants to send this session
-            System.out.println("How many messages do you want to send?");
-            int numMessages = Integer.parseInt(input.nextLine());
-
             int menuChoice = 0; // stores the user's menu selection
 
             // Keep showing the menu until the user chooses Quit
@@ -89,35 +85,41 @@ public class ProgPoePartOne {
 
                 if (menuChoice == 1) {
 
-                    // Send messages one at a time up to the limit
-                    int messagesSent = 0;
+                    // Ask how many messages the user wants to send this session
+                    System.out.println("How many messages do you want to send?");
+                    int numMessages = Integer.parseInt(input.nextLine());
+                    
+                    
+                    // for loop runs exactly numMessages times
+                    for (int i = 0; i < numMessages; i++) {
 
-                    while (messagesSent < numMessages) {
+                        System.out.println("\nMessage " + (i + 1) + " of " + numMessages);
 
+                        //validating recipient number
                         System.out.println("Enter recipient number (must start with +27 and be max 12 characters):");
                         String recipient = input.nextLine();
 
+                        // If number is invalid, redo this iteration
+                        if (!recipient.startsWith("+27") || recipient.length() >= 12) {
+                            System.out.println("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
+                            i--; // step back so this attempt doesn't count
+                            continue; // go back to the top of the loop
+                        }
+
+                        // Get and validate message text
                         System.out.println("Enter your message (max 250 characters):");
                         String text = input.nextLine();
 
-                        // Check if the message is too long
+                        // If message is too long, redo this iteration
                         if (text.length() > 250) {
-                            int over = text.length() - 250; // how many characters over the limit
-                            System.out.println("Please enter a message of less than 250 characters.");
+                            int over = text.length() - 250;
                             System.out.println("Message exceeds 250 characters by " + over + "; please reduce the size.");
-                            continue; // skip the rest and ask again
+                            i--; // step back so this attempt doesn't count
+                            continue; // go back to the top of the loop
                         }
 
                         // Create the message object with the entered details
-                        Message msg = new Message(messagesSent + 1, recipient, text);
-
-                        // Validate the recipient number and show the result
-                        System.out.println(msg.checkRecipientCell());
-
-                        // If the number is invalid, ask again without counting this attempt
-                        if (!recipient.startsWith("+27") || recipient.length() > 12) {
-                            continue;
-                        }
+                        Message msg = new Message(i + 1, recipient, text);
 
                         // Show the full message details
                         System.out.println(msg.printMessages());
@@ -126,12 +128,11 @@ public class ProgPoePartOne {
                         String result = msg.sentMessage();
                         System.out.println(result);
 
-                        messagesSent++; // only count it once everything went through
-                    }
+                    } 
 
-                    // Show the total after all messages are done
+                    // Show total after all messages are done
                     Message temp = new Message(0, "+0000000000", "placeholder");
-                    System.out.println("Total messages sent: " + temp.returnTotalMessages());
+                    System.out.println("\nTotal messages sent: " + temp.returnTotalMessages());
 
                 } else if (menuChoice == 2) {
                     System.out.println("Coming Soon.");
