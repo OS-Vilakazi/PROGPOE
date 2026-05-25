@@ -84,6 +84,10 @@ public class Message {
     // Saves this message into a file called "messages.json"
     public void storeMessage() {
         try {
+            // This prints the exact path where the file is being saved
+            java.io.File f = new java.io.File("messages.json");
+            System.out.println("Saving to: " + f.getAbsolutePath());
+        
             // Build the message as a JSON formatted string manually
             String messageData = "{\n" +
                 "  \"messageID\": \"" + messageID + "\",\n" +
