@@ -51,7 +51,7 @@ public class Message {
     
     // Checks the recipient number starts with '+' and is max 10 characters
     public String checkRecipientCell() {
-        if (recipient.startsWith("+") && recipient.length() <= 10) {
+        if (recipient.startsWith("+27") && recipient.length() <= 12) {
             return "Cell phone number successfully captured.";
         } else {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";

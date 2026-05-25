@@ -94,7 +94,7 @@ public class ProgPoePartOne {
 
                     while (messagesSent < numMessages) {
 
-                        System.out.println("Enter recipient number (must start with + and be max 10 characters):");
+                        System.out.println("Enter recipient number (must start with +27 and be max 12 characters):");
                         String recipient = input.nextLine();
 
                         System.out.println("Enter your message (max 250 characters):");
@@ -115,7 +115,7 @@ public class ProgPoePartOne {
                         System.out.println(msg.checkRecipientCell());
 
                         // If the number is invalid, ask again without counting this attempt
-                        if (!recipient.startsWith("+") || recipient.length() > 10) {
+                        if (!recipient.startsWith("+27") || recipient.length() > 12) {
                             continue;
                         }
 
