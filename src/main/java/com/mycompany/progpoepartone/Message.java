@@ -83,28 +83,32 @@ public class Message {
     
     // Saves this message into a file called "messages.json"
     public void storeMessage() {
-        try {
-            // This prints the exact path where the file is being saved
-            java.io.File f = new java.io.File("messages.json");
-            System.out.println("Saving to: " + f.getAbsolutePath());
-        
-            // Build the message as a JSON formatted string manually
-            String messageData = "{\n" +
-                "  \"messageID\": \"" + messageID + "\",\n" +
-                "  \"messageHash\": \"" + createMessageHash() + "\",\n" +
-                "  \"recipient\": \"" + recipient + "\",\n" +
-                "  \"message\": \"" + messageText + "\"\n" +
-                "}";
+    try {
+        // Build the message text
+        String messageData = "{\n" +
+            "  \"messageID\": \"" + messageID + "\",\n" +
+            "  \"messageHash\": \"" + createMessageHash() + "\",\n" +
+            "  \"recipient\": \"" + recipient + "\",\n" +
+            "  \"message\": \"" + messageText + "\"\n" +
+            "}";
 
-            // 'true' means APPEND - adds to the file instead of overwriting it
-            FileWriter file = new FileWriter("messages.json", true);
-            file.write(messageData + ",\n");
-            file.close();
+        // Saves to your project folder automatically
+        String projectPath = System.getProperty("user.dir") + "/messages.json";
 
-        } catch (Exception e) {
-            System.out.println("Error saving message: " + e.getMessage());
-        }
+        System.out.println("Saving to: " + projectPath);
+
+        FileWriter writer = new FileWriter(projectPath, true);
+        writer.write(messageData + ",\n");
+        writer.flush();
+        writer.close();
+
+        System.out.println("File saved successfully.");
+
+    } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+        e.printStackTrace();
     }
+}
     
     // Asks the user what to do with the message
     public String sentMessage() {
@@ -124,6 +128,7 @@ public class Message {
         } else if (choice == 2) {
             return "Press 0 to delete the message.";
         } else if (choice == 3) {
+            storeMessage();
             return "Message successfully stored.";
         } else {
             return "Invalid option.";

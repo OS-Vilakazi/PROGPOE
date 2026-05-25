@@ -100,7 +100,7 @@ public class ProgPoePartOne {
                         String recipient = input.nextLine();
 
                         // If number is invalid, redo this iteration
-                        if (!recipient.startsWith("+27") || recipient.length() >= 12) {
+                        if (!recipient.startsWith("+27") || recipient.length() > 12) {
                             System.out.println("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
                             i--; // step back so this attempt doesn't count
                             continue; // go back to the top of the loop
