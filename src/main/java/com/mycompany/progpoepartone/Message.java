@@ -328,6 +328,35 @@ public class Message {
         }
     }
     
+    //Delete a message using its hash
+    public static void deleteByHash(String hashToDelete) {
+        boolean found = false;
+        String upperHash = hashToDelete.toUpperCase();
+
+        // Search the messageHashes array
+        for (int i = 0; i < messageHashes.size(); i++) {
+            if (messageHashes.get(i).equals(upperHash)) {
+                // Get the message text before removing it
+                String deletedText = "";
+                if (i < sentTexts.size()) {
+                    deletedText = sentTexts.get(i);
+                    sentTexts.remove(i);
+                    sentRecipients.remove(i);
+                    messageIDs.remove(i);
+                }
+                messageHashes.remove(i);
+
+                System.out.println("Message: \"" + deletedText + "\" successfully deleted.");
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No message found with hash: " + hashToDelete);
+        }
+    }
+    
     // Getters - let other classes read private fields
     public String getMessageID()   { return messageID; }
     public String getMessageText() { return messageText; }
