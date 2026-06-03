@@ -213,6 +213,24 @@ public class Message {
     public int returnTotalMessages() {
         return totalMessagesSent;
     }
+    
+     //Display sender and recipient of all stored messages (reads from JSON)
+    public static void displayStoredSendersAndRecipients() {
+        loadStoredMessages();
+
+        if (storedMessages.size() == 0) {
+            System.out.println("No stored messages found.");
+            return;
+        }
+
+        System.out.println("\n--- Stored Messages: Recipient and Message ---");
+        for (int i = 0; i < storedMessages.size(); i++) {
+            String block = storedMessages.get(i);
+            String recipient = extractField(block, "recipient");
+            String message = extractField(block, "message");
+            System.out.println((i + 1) + ". Recipient: " + recipient + " | Message: " + message);
+        }
+    }
 
     // Getters - let other classes read private fields
     public String getMessageID()   { return messageID; }
