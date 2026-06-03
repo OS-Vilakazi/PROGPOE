@@ -378,4 +378,12 @@ public class Message {
     public String getMessageID()   { return messageID; }
     public String getMessageText() { return messageText; }
     public String getRecipient()   { return recipient; }
+    
+    // Array getters (used in tests)
+    public static ArrayList<String> getSentMessages()        { return sentMessages; }
+    public static ArrayList<String> getDisregardedMessages() { return disregardedMessages; }
+    public static ArrayList<String> getSentRecipients()      { return sentRecipients; }
+    public static ArrayList<String> getSentTexts()           { return sentTexts; }
+    public static ArrayList<String> getMessageHashes()       { return messageHashes; }
+    public static ArrayList<String> getMessageIDs()          { return messageIDs; }
 }
