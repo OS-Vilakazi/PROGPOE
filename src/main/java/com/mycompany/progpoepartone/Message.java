@@ -119,6 +119,35 @@ public class Message {
     }
 }
     
+    // Reads messages.json and loads each stored message into the storedMessages array
+    public static void loadStoredMessages() {
+        storedMessages.clear(); // clear first to avoid duplicates on repeated calls
+
+        try {
+            String projectPath = System.getProperty("user.dir") + "/messages.json";
+            FileReader fr = new FileReader(projectPath);
+            BufferedReader reader = new BufferedReader(fr);
+
+            String line = "";
+            String currentBlock = "";
+
+            // Read file line by line, group each {...} block as one message
+            while ((line = reader.readLine()) != null) {
+                currentBlock = currentBlock + line + "\n";
+
+                // Each message ends with "}," so we know the block is complete
+                if (line.trim().equals("},")) {
+                    storedMessages.add(currentBlock.trim());
+                    currentBlock = ""; // reset for next message
+                }
+            }
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("No stored messages file found.");
+        }
+    }
+    
     // Asks the user what to do with the message
     public String sentMessage() {
         Scanner input = new Scanner(System.in);
