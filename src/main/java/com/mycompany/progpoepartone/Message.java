@@ -191,7 +191,9 @@ public class Message {
         } else if (choice == 2) {
             return "Press 0 to delete the message.";
         } else if (choice == 3) {
-            storeMessage();
+            storeMessage();                         // write to JSON file
+            messageHashes.add(createMessageHash());
+            messageIDs.add(messageID);
             return "Message successfully stored.";
         } else {
             return "Invalid option.";
