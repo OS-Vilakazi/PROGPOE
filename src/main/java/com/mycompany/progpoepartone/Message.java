@@ -148,6 +148,27 @@ public class Message {
         }
     }
     
+     // Helper: extract a field value from a JSON block line
+    // e.g. extractField(block, "message") returns the message text
+    private static String extractField(String block, String fieldName) {
+        String[] lines = block.split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i].trim();
+            if (line.startsWith("\"" + fieldName + "\"")) {
+                // Line looks like: "message": "Hi there"
+                // Remove the field name and quotes to get the value
+                String value = line.replace("\"" + fieldName + "\":", "").trim();
+                value = value.replace("\"", "").trim();
+                // Remove trailing comma if present
+                if (value.endsWith(",")) {
+                    value = value.substring(0, value.length() - 1);
+                }
+                return value;
+            }
+        }
+        return "";
+    }
+    
     // Asks the user what to do with the message
     public String sentMessage() {
         Scanner input = new Scanner(System.in);
