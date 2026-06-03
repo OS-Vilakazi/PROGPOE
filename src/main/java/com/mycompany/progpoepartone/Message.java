@@ -267,7 +267,7 @@ public class Message {
         System.out.println("\nLongest message: " + longest);
     }
     
-    // 2c: Search for a message by ID, display recipient and message
+    //Search for a message by ID, display recipient and message
     public static void searchByMessageID(String searchID) {
         boolean found = false;
 
@@ -295,6 +295,36 @@ public class Message {
 
         if (!found) {
             System.out.println("No message found with ID: " + searchID);
+        }
+    }
+    
+    //Search for all messages sent or stored for a particular recipient
+    public static void searchByRecipient(String searchRecipient) {
+        boolean found = false;
+
+        System.out.println("\nMessages for " + searchRecipient + ":");
+
+        // Search sent messages
+        for (int i = 0; i < sentRecipients.size(); i++) {
+            if (sentRecipients.get(i).equals(searchRecipient)) {
+                System.out.println("- " + sentTexts.get(i));
+                found = true;
+            }
+        }
+
+        // Search stored messages from JSON
+        loadStoredMessages();
+        for (int i = 0; i < storedMessages.size(); i++) {
+            String recipient = extractField(storedMessages.get(i), "recipient");
+            if (recipient.equals(searchRecipient)) {
+                String message = extractField(storedMessages.get(i), "message");
+                System.out.println("- " + message);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No messages found for: " + searchRecipient);
         }
     }
     
