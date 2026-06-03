@@ -231,7 +231,42 @@ public class Message {
             System.out.println((i + 1) + ". Recipient: " + recipient + " | Message: " + message);
         }
     }
+    
+    //Display the longest message across sent and stored messages
+    public static void displayLongestMessage() {
+        // Collect all message texts
+        ArrayList<String> allTexts = new ArrayList<>();
 
+        // Add sent message texts
+        for (int i = 0; i < sentTexts.size(); i++) {
+            allTexts.add(sentTexts.get(i));
+        }
+
+        // Add stored message texts from JSON
+        loadStoredMessages();
+        for (int i = 0; i < storedMessages.size(); i++) {
+            String text = extractField(storedMessages.get(i), "message");
+            if (!text.equals("")) {
+                allTexts.add(text);
+            }
+        }
+
+        if (allTexts.size() == 0) {
+            System.out.println("No messages found.");
+            return;
+        }
+
+        // Find the longest one by looping through all texts
+        String longest = allTexts.get(0);
+        for (int i = 1; i < allTexts.size(); i++) {
+            if (allTexts.get(i).length() > longest.length()) {
+                longest = allTexts.get(i);
+            }
+        }
+
+        System.out.println("\nLongest message: " + longest);
+    }
+    
     // Getters - let other classes read private fields
     public String getMessageID()   { return messageID; }
     public String getMessageText() { return messageText; }
