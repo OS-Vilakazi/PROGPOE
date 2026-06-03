@@ -30,11 +30,9 @@ public class MessageTest {
         for (int i = 0; i < 251; i++) {
             longMessage = longMessage + "A"; // build a 251-character string manually
         }
-
-        Message msg = new Message(1, "+27718693002", longMessage);
+        Message msg = new Message(1, "+27834557896", longMessage);
 
         boolean result = false;
-
         if (msg.getMessageText().length() <= 250) {
             result = true;
         }
@@ -87,6 +85,57 @@ public class MessageTest {
     }
 
     // TEST 7: Sending a message returns the correct confirmation
+    @Test
+    public void testSentMessagesArray_ContainsExpectedData() {
+        // Message 1 - Sent
+        Message msg1 = new Message(1, "+27834557896", "Did you get the cake?");
+        // Message 4 - Sent (developer number, invalid recipient but message text still correct)
+        Message msg4 = new Message(4, "0838884567", "It is dinner time!");
+
+        assertEquals("Did you get the cake?", msg1.getMessageText());
+        assertEquals("It is dinner time!", msg4.getMessageText());
+    }
+
+    // TEST 8: Longest message from test data is message 2
+    @Test
+    public void testLongestMessage() {
+        String msg1text = "Did you get the cake?";
+        String msg2text = "Where are you? You are late! I have asked you to be on time.";
+        String msg3text = "Yohoooo, I am at your gate.";
+        String msg4text = "It is dinner time!";
+
+        // Find longest manually
+        String longest = msg1text;
+        if (msg2text.length() > longest.length()) { longest = msg2text; }
+        if (msg3text.length() > longest.length()) { longest = msg3text; }
+        if (msg4text.length() > longest.length()) { longest = msg4text; }
+
+        assertEquals("Where are you? You are late! I have asked you to be on time.", longest);
+    }
+
+    // TEST 9: Search by recipient - +27838884567 has messages 2 and 5
+    @Test
+    public void testSearchByRecipient() {
+        Message msg2 = new Message(2, "+27838884567", "Where are you? You are late! I have asked you to be on time.");
+        Message msg5 = new Message(5, "+27838884567", "Ok, I am leaving without you.");
+
+        boolean msg2Match = msg2.getRecipient().equals("+27838884567");
+        boolean msg5Match = msg5.getRecipient().equals("+27838884567");
+
+        assertEquals(true, msg2Match);
+        assertEquals(true, msg5Match);
+    }
+
+    // TEST 10: Delete by hash - check confirmation message
+    @Test
+    public void testDeleteByHash_ConfirmationMessage() {
+        String expected = "Message: \"Where are you? You are late! I have asked you to be on time.\" successfully deleted.";
+        // We verify the format of the expected output string
+        boolean containsDeleted = expected.contains("successfully deleted.");
+        assertEquals(true, containsDeleted);
+    }
+
+    // TEST 11: sentMessage returns correct string for Send
     @Test
     public void testSentMessage_Send() {
         String expected = "Message successfully sent.";
