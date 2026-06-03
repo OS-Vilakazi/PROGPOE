@@ -1,4 +1,3 @@
-
 package com.mycompany.progpoepartone;
 
 import java.util.Scanner;
@@ -80,6 +79,7 @@ public class ProgPoePartOne {
                 System.out.println("\n1) Send Messages");
                 System.out.println("2) Show recently sent messages");
                 System.out.println("3) Quit");
+                System.out.println("4) Stored Messages");
 
                 menuChoice = Integer.parseInt(input.nextLine());
 
@@ -131,7 +131,7 @@ public class ProgPoePartOne {
                     } 
 
                     // Show total after all messages are done
-                    Message temp = new Message(0, "+0000000000", "placeholder");
+                    Message temp = new Message(0, "+270000000000", "placeholder");
                     System.out.println("\nTotal messages sent: " + temp.returnTotalMessages());
 
                 } else if (menuChoice == 2) {
@@ -140,8 +140,64 @@ public class ProgPoePartOne {
                 } else if (menuChoice == 3) {
                     System.out.println("Goodbye.");
 
+                } else if (menuChoice == 4) {
+
+                    // Stored Messages sub-menu
+                    int subChoice = 0;
+
+                    while (subChoice != 7) {
+                        System.out.println("\n--- Stored Messages Menu ---");
+                        System.out.println("1) Display all stored messages (recipient + message)");
+                        System.out.println("2) Display the longest message");
+                        System.out.println("3) Search for a message by ID");
+                        System.out.println("4) Search messages for a particular recipient");
+                        System.out.println("5) Delete a message using its hash");
+                        System.out.println("6) Display full message report");
+                        System.out.println("7) Back to main menu");
+
+                        subChoice = Integer.parseInt(input.nextLine());
+
+                        if (subChoice == 1) {
+                            // 2a - display stored messages
+                            Message.displayStoredSendersAndRecipients();
+
+                        } else if (subChoice == 2) {
+                            // 2b - longest message
+                            Message.displayLongestMessage();
+
+                        } else if (subChoice == 3) {
+                            // 2c - search by message ID
+                            System.out.println("Enter Message ID to search:");
+                            String searchID = input.nextLine();
+                            Message.searchByMessageID(searchID);
+
+                        } else if (subChoice == 4) {
+                            // 2d - search by recipient
+                            System.out.println("Enter recipient number to search:");
+                            String searchRecipient = input.nextLine();
+                            Message.searchByRecipient(searchRecipient);
+
+                        } else if (subChoice == 5) {
+                            // 2e - delete by hash
+                            System.out.println("Enter message hash to delete:");
+                            String hash = input.nextLine();
+                            Message.deleteByHash(hash);
+
+                        } else if (subChoice == 6) {
+                            // 2f - full report
+                            Message.displayReport();
+
+                        } else if (subChoice == 7) {
+                            // go back to main menu
+                            System.out.println("Returning to main menu.");
+
                 } else {
                     System.out.println("Invalid option, please choose 1, 2, or 3.");
+                }
+            }
+
+        } else {
+                    System.out.println("Invalid option, please choose 1, 2, 3, or 4.");
                 }
             }
 
