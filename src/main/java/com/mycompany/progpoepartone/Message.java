@@ -267,6 +267,37 @@ public class Message {
         System.out.println("\nLongest message: " + longest);
     }
     
+    // 2c: Search for a message by ID, display recipient and message
+    public static void searchByMessageID(String searchID) {
+        boolean found = false;
+
+        // Search in sent messages
+        for (int i = 0; i < messageIDs.size(); i++) {
+            if (messageIDs.get(i).equals(searchID)) {
+                if (i < sentRecipients.size()) {
+                    System.out.println("Recipient: " + sentRecipients.get(i));
+                    System.out.println("Message: " + sentTexts.get(i));
+                }
+                found = true;
+            }
+        }
+
+        // Also search in stored JSON messages
+        loadStoredMessages();
+        for (int i = 0; i < storedMessages.size(); i++) {
+            String id = extractField(storedMessages.get(i), "messageID");
+            if (id.equals(searchID)) {
+                System.out.println("Recipient: " + extractField(storedMessages.get(i), "recipient"));
+                System.out.println("Message: " + extractField(storedMessages.get(i), "message"));
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No message found with ID: " + searchID);
+        }
+    }
+    
     // Getters - let other classes read private fields
     public String getMessageID()   { return messageID; }
     public String getMessageText() { return messageText; }
