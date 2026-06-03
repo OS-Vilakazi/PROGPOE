@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 //to help create a json file to store messages
 import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.BufferedReader;
 //
 /**
  *
@@ -23,8 +25,15 @@ public class Message {
     
 
     private static ArrayList<String> sentMessages = new ArrayList<>(); // stores all sent messages
-     private static int totalMessagesSent = 0; // counts how many were sent
+    private static ArrayList<String> disregardedMessages = new ArrayList<>(); // all disregarded message details
+    private static ArrayList<String> storedMessages      = new ArrayList<>(); // loaded from JSON file
+    private static ArrayList<String> messageHashes       = new ArrayList<>(); // all hashes
+    private static ArrayList<String> messageIDs          = new ArrayList<>(); // all IDs
+    private static ArrayList<String> sentRecipients      = new ArrayList<>(); // recipients of sent messages
+    private static ArrayList<String> sentTexts           = new ArrayList<>(); // texts of sent messages
     
+     private static int totalMessagesSent = 0; // counts how many were sent
+     
     //A Constructor to run new messages 
     public Message(int messageNumber, String recipient, String messageText) {
         this.messageNumber = messageNumber;
