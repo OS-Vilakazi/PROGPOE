@@ -183,6 +183,10 @@ public class Message {
         if (choice == 1) {
             totalMessagesSent++;              // add 1 to the counter
             sentMessages.add(printMessages()); // save message details to the list
+            sentRecipients.add(recipient);           // add recipient to recipients array
+            sentTexts.add(messageText);              // add text to texts array
+            messageHashes.add(createMessageHash());  // add hash to hashes array
+            messageIDs.add(messageID);               // add ID to IDs array
             return "Message successfully sent.";
         } else if (choice == 2) {
             return "Press 0 to delete the message.";
