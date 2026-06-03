@@ -357,6 +357,23 @@ public class Message {
         }
     }
     
+    //Display full report of all sent messages
+    public static void displayReport() {
+        System.out.println("\n========== MESSAGE REPORT ==========");
+
+        if (sentMessages.size() == 0) {
+            System.out.println("No messages sent yet.");
+        } else {
+            for (int i = 0; i < sentMessages.size(); i++) {
+                System.out.println("\n--- Message " + (i + 1) + " ---");
+                System.out.println(sentMessages.get(i));
+            }
+        }
+
+        System.out.println("\n====================================");
+        System.out.println("Total messages sent: " + totalMessagesSent);
+    }
+    
     // Getters - let other classes read private fields
     public String getMessageID()   { return messageID; }
     public String getMessageText() { return messageText; }
